@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <string.h>
 #include "dictionary.h"
+#include <ctype.h>
+#include <stdlib.h>
 
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 
@@ -12,38 +14,81 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 
 	char str[LENGTH];
 
-	FILE *fp;
+	FILE* fp;
 	fp = fopen(dictionary_file, "r");
 	if (fp == NULL){
 		printf("Could not open file %s", dictionary_file);
 		return false;
 	}
 
-	int count = 0
-	while (fgets(str, LENGTH, fp) != NULL){
-    	node *aNode = malloc(sizeof(node));
-        strnpy(aNode->word, line, LENGTH)
-    	aNode.next = NULL;
+	while (fgets(str, LENGTH, fp) != NULL) {
+    	node* aNode = malloc(sizeof(node));
+        strpy(aNode->word, line)
 
     	int index = hash_function(str);
 
-    	if (hashtable[index] == NULL){
+    	if (hashtable[index] == NULL) {
+	    	aNode->next = NULL;
     		hashtable[index] = aNode;
     	}
     	else{
-    		node *tmp = hashtable[index];
-    		while (tmp != NULL)
-    		{
-    			if (tmp->next == NULL)
-    			{
-    				break;
-    			}
-    			tmp = tmp->next;
-    		}
-    		tmp->next = aNode;
+	    	aNode->next = hashtable[index];
+    		hashtable[index] = aNode;
     	}
-    	count++;
     }
     fclose(fp);
+   return true;
+}
+
+bool check_word(const char* word, hashmap_t hashtable[]) {
+	int index = hash_function(word);
+	node* cursor = hashtable[index];
+	while(cursor) {
+		if (strcmp(cursor->word, wordBuffer) == 0) { 
+			return true;
+		}
+		else{
+			cursor = cursor->next;
+		}
+	}
+	return 0;
+}
+
+int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
+	int num_misspelled = 0;
+	if (fp == NULL) {
+        printf("Could not open file");
+        return 1;
+    }
+
+    char str[10000];
+    char* token = strtok(str," ");
+
+    while (fgets(str, 10000, fp) != NULL) {
+    	token = strtok(NULL," ");
+    	while(token != NULL){
+            if (token[strlen(token)-1] =='\n'){
+            	token[strlen(token)-1]='\0';
+            }
+
+            token[strlen(token)]='\0';    
+
+            if (ispunct(token[strlen(token)-1])){
+                token[strlen(token)-1]='\0';
+            }
+            if (ispunct(token[0])){
+                token[0]='\0';
+            }
+			bool spellcheck = check_word(tolken,hashtable);
+			if(!(wordCheckResult == 1 && strlen(wordBuffer) < 500000)){
+        		misspelled[num_misspelled] = malloc(strlen(token));
+            	strcpy(misspelled[num_misspelled], token);
+            	num_misspelled ++;
+            }            
+		}
+
+		
+
+    }
 
 }
