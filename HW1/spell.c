@@ -6,7 +6,7 @@
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 
 	for(int k = 0; k < HASH_SIZE; k++){
-		free(hashtable[k]);
+		// free(hashtable[k]);
 		hashtable[k] = NULL;
 	}
 
@@ -21,9 +21,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 
 	int count = 0
 	while (fgets(str, LENGTH, fp) != NULL){
-    	node aNode;
+    	node *aNode = malloc(sizeof(node));
+        strnpy(aNode->word, line, LENGTH)
     	aNode.next = NULL;
-    	aNode.word = str;
 
     	int index = hash_function(str);
 
