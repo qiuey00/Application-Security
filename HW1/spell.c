@@ -65,7 +65,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
 	int num_misspelled = 0;
 	if (fp == NULL) {
         printf("Could not open file");
-        return 1;
+        return 0;
     }
 
     char str[10000];
@@ -93,4 +93,5 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             }            
 		}
     }
+    return num_misspelled;
 }
