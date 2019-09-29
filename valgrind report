@@ -1,0 +1,192 @@
+==2864== Memcheck, a memory error detector
+==2864== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==2864== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==2864== Command: ./spell_check test1.txt wordlist.txt
+==2864== Parent PID: 2266
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2A7E: strtok (strtok.S:138)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2AAE: strtok (strtok.S:164)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x4EC2AB1: strtok (strtok.S:165)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2AB6: strtok (strtok.S:168)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x4EC2AB9: strtok (strtok.S:169)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2ABE: strtok (strtok.S:172)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x4EC2AC1: strtok (strtok.S:173)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2AC6: strtok (strtok.S:176)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x4EC2AC9: strtok (strtok.S:177)
+==2864==    by 0x400C63: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x4EC2A3D: strtok (strtok.S:94)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2A7C: strtok (strtok.S:137)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2A83: strtok (strtok.S:141)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2AAC: strtok (strtok.S:163)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2AB3: strtok (strtok.S:167)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x4EC2AD7: strtok (strtok.S:184)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4EC2AD9: strtok (strtok.S:186)
+==2864==    by 0x400C7E: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Conditional jump or move depends on uninitialised value(s)
+==2864==    at 0x400EA0: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0E2: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400C99: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0F4: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400C99: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x400CA8: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0E2: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400CDD: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0F4: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400CDD: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x400CEB: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0E2: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400D04: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0F4: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400D04: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x400D13: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x400D9D: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0E2: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400B93: check_word (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400E02: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x4C2E0F4: strlen (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400B93: check_word (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400E02: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Use of uninitialised value of size 8
+==2864==    at 0x400B66: check_word (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400E02: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== Invalid write of size 1
+==2864==    at 0x4C2E1F3: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400E7A: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==  Address 0x55fbfc4 is 0 bytes after a block of size 4 alloc'd
+==2864==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400E48: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== 
+==2864== HEAP SUMMARY:
+==2864==     in use at exit: 6,653,877 bytes in 118,822 blocks
+==2864==   total heap usage: 118,824 allocs, 2 frees, 6,655,013 bytes allocated
+==2864== 
+==2864== 13 bytes in 3 blocks are definitely lost in loss record 1 of 5
+==2864==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400E48: check_words (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F76: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== 6,496 bytes in 116 blocks are definitely lost in loss record 2 of 5
+==2864==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400A3E: load_dictionary (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F56: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== 6,647,368 (93,240 direct, 6,554,128 indirect) bytes in 1,665 blocks are definitely lost in loss record 5 of 5
+==2864==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2864==    by 0x400A8B: load_dictionary (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864==    by 0x400F56: main (in /home/user/Desktop/Application-Security/HW1/spell_check)
+==2864== 
+==2864== LEAK SUMMARY:
+==2864==    definitely lost: 99,749 bytes in 1,784 blocks
+==2864==    indirectly lost: 6,554,128 bytes in 117,038 blocks
+==2864==      possibly lost: 0 bytes in 0 blocks
+==2864==    still reachable: 0 bytes in 0 blocks
+==2864==         suppressed: 0 bytes in 0 blocks
+==2864== 
+==2864== For counts of detected and suppressed errors, rerun with: -v
+==2864== Use --track-origins=yes to see where uninitialised values come from
+==2864== ERROR SUMMARY: 43 errors from 34 contexts (suppressed: 0 from 0)
