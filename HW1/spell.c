@@ -25,7 +25,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
             str[i] = tolower(str[i]);
         }
     	node* aNode = malloc(sizeof(node));
-        strpy(aNode->word, str);
+        strcpy(aNode->word, str);
 
     	int index = hash_function(str);
 
