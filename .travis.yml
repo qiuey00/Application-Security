@@ -5,8 +5,7 @@ before_install:
     - sudo apt-get install -y check
 compiler: 
     - gcc
-scripts:
+script: make
     # - make get-deps
-    - make prog
     # - gcc -Wall -o spell_check dictionary.o spell.o main.o
     # - ./spell_check test1.txt wordlist.txt
