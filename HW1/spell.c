@@ -11,7 +11,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 		// free(hashtable[k]);
 		hashtable[k] = NULL;
 	}
-
 	char str[LENGTH];
 
 	FILE* fp;
@@ -22,6 +21,9 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 	}
 
 	while (fgets(str, LENGTH, fp) != NULL) {
+        for (int i=0; a<=strlen(str); i++) {
+            str[i] = tolower(str[i]);
+        }
     	node* aNode = malloc(sizeof(node));
         strpy(aNode->word, line)
 
@@ -37,21 +39,26 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
     	}
     }
     fclose(fp);
-   return true;
+    return true;
 }
 
 bool check_word(const char* word, hashmap_t hashtable[]) {
 	int index = hash_function(word);
 	node* cursor = hashtable[index];
+    char theWord[LENGTH];
+
+    for(int i=0; i<=strlen(word); i++) {
+        theWord[i] = tolower(word[i]);
+    }
 	while(cursor) {
-		if (strcmp(cursor->word, wordBuffer) == 0) { 
+		if (strcmp(cursor->word, theWord) == 0) { 
 			return true;
 		}
 		else{
 			cursor = cursor->next;
 		}
 	}
-	return 0;
+	return false;
 }
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
@@ -70,7 +77,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             if (token[strlen(token)-1] =='\n'){
             	token[strlen(token)-1]='\0';
             }
-
             token[strlen(token)]='\0';    
 
             if (ispunct(token[strlen(token)-1])){
@@ -80,15 +86,11 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
                 token[0]='\0';
             }
 			bool spellcheck = check_word(tolken,hashtable);
-			if(!(wordCheckResult == 1 && strlen(wordBuffer) < 500000)){
+			if(!(spellcheck == true)){
         		misspelled[num_misspelled] = malloc(strlen(token));
             	strcpy(misspelled[num_misspelled], token);
             	num_misspelled ++;
             }            
 		}
-
-		
-
     }
-
 }
