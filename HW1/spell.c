@@ -102,9 +102,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             }
             token = strtok(NULL," ");
 		}
-        if (num_misspelled > MAX_MISSPELLED){
-            break;
-        }
+        // if (num_misspelled > MAX_MISSPELLED){
+        //     break;
+        // }
 
     }
     return num_misspelled;
