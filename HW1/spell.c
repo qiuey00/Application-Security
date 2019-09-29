@@ -43,7 +43,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
     		hashtable[index] = aNode;
     	}
     }
-
     fclose(fp);
     return true;
 
@@ -55,7 +54,6 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
     for(int i=0; i<=strlen(word); i++) {
         theWord[i] = tolower(word[i]);
     }
-
     int index = hash_function(theWord);
 	node* cursor = hashtable[index];
 
@@ -72,6 +70,7 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
 	int num_misspelled = 0;
+
     char str[255];
     char* token = strtok(str," ");
 
@@ -95,16 +94,14 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             }
 
 			bool spellcheck = check_word(token,hashtable);
-			if(spellcheck == false){
+            // if(!(spellcheck == 1 && strlen(str) < 255)){
+			if(!spellcheck){
         		misspelled[num_misspelled] = malloc(strlen(token));
             	strcpy(misspelled[num_misspelled], token);
             	num_misspelled ++;
             }
             token = strtok(NULL," ");
 		}
-        // if (num_misspelled > MAX_MISSPELLED){
-        //     break;
-        // }
 
     }
     return num_misspelled;
