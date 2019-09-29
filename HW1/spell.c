@@ -21,11 +21,11 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 	}
 
 	while (fgets(str, LENGTH, fp) != NULL) {
-        for (int i=0; a<=strlen(str); i++) {
+        for (int i=0; i<=strlen(str); i++) {
             str[i] = tolower(str[i]);
         }
     	node* aNode = malloc(sizeof(node));
-        strpy(aNode->word, line)
+        strpy(aNode->word, str);
 
     	int index = hash_function(str);
 
