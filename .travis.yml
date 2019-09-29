@@ -6,7 +6,7 @@ before_install:
 compiler: 
     - gcc
 scripts:
-    - make get-deps
+    # - make get-deps
     - make prog
     # - gcc -Wall -o spell_check dictionary.o spell.o main.o
     # - ./spell_check test1.txt wordlist.txt
