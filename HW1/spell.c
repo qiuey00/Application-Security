@@ -85,7 +85,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             if (ispunct(token[0])){
                 token[0]='\0';
             }
-			bool spellcheck = check_word(tolken,hashtable);
+			bool spellcheck = check_word(token,hashtable);
 			if(!(spellcheck == true)){
         		misspelled[num_misspelled] = malloc(strlen(token));
             	strcpy(misspelled[num_misspelled], token);
