@@ -71,10 +71,10 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
 	int num_misspelled = 0;
 
-    char str[255];
+    char str[10000];
     char* token = strtok(str," ");
 
-    while (fgets(str, 255, fp)) {
+    while (fgets(str, 10000, fp)) {
         token = strtok(NULL," ");
     	while (token != NULL){
             if (token[strlen(token)-1] =='\n'){
