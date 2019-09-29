@@ -50,9 +50,6 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 }
 
 bool check_word(const char* word, hashmap_t hashtable[]) {
-    if (strlen(word > LENGTH)){
-        return false;
-    }
     char theWord[LENGTH];
 
     for(int i=0; i<=strlen(word); i++) {
@@ -105,6 +102,9 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             }
             token = strtok(NULL," ");
 		}
+        if (num_misspelled > MAX_MISSPELLED){
+            break;
+        }
 
     }
     return num_misspelled;
