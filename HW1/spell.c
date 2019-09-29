@@ -72,7 +72,6 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
     char* token = strtok(str," ");
 
     while (fgets(str, 10000, fp) != NULL) {
-    	token = strtok(NULL," ");
     	while(token != NULL){
             if (token[strlen(token)-1] =='\n'){
             	token[strlen(token)-1]='\0';
@@ -85,12 +84,15 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             if (ispunct(token[0])){
                 token[0]='\0';
             }
+
 			bool spellcheck = check_word(token,hashtable);
-			if(!(spellcheck == true)){
-        		misspelled[num_misspelled] = malloc(strlen(token));
+			if(!spellcheck){
+        		// misspelled[num_misspelled] = malloc(strlen(token));
             	strcpy(misspelled[num_misspelled], token);
             	num_misspelled ++;
-            }            
+            }
+            token = strtok(NULL," ");
+
 		}
     }
     return num_misspelled;
