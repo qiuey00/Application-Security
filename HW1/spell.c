@@ -6,50 +6,59 @@
 #include <stdlib.h>
 
 bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
+	for(int i=0; i<=HASH_SIZE; i++){
+        hashtable[i] = NULL;
+    }
 
-	for(int k = 0; k < HASH_SIZE; k++){
-		// free(hashtable[k]);
-		hashtable[k] = NULL;
-	}
-	char str[LENGTH];
+    FILE* fp = fopen(dictionary_file, "r");
 
-	FILE* fp;
-	fp = fopen(dictionary_file, "r");
-	if (fp == NULL){
-		printf("Could not open file %s", dictionary_file);
+	if (!fp) {
+		printf("no file");
 		return false;
 	}
 
-	while (fgets(str, LENGTH, fp) != NULL) {
-        for (int i=0; i<=strlen(str); i++) {
+    char str[LENGTH];
+
+	while(fgets(str, LENGTH, fp)) {
+        for(int i = 0; i <= strlen(str); i++) {
             str[i] = tolower(str[i]);
         }
-    	node* aNode = malloc(sizeof(node));
-        strcpy(aNode->word, str);
+
+        if (str[strlen(str)-1] == '\n'){
+            str[strlen(str)-1] = '\0';
+        }
 
     	int index = hash_function(str);
 
     	if (hashtable[index] == NULL) {
+            node *aNode = malloc(sizeof(node));
+            strcpy(aNode->word, str);
 	    	aNode->next = NULL;
     		hashtable[index] = aNode;
     	}
     	else{
+            node *aNode = malloc(sizeof(node));
+            strcpy(aNode->word, str);
 	    	aNode->next = hashtable[index];
     		hashtable[index] = aNode;
     	}
     }
+
     fclose(fp);
     return true;
+
 }
 
 bool check_word(const char* word, hashmap_t hashtable[]) {
-	int index = hash_function(word);
-	node* cursor = hashtable[index];
     char theWord[LENGTH];
 
     for(int i=0; i<=strlen(word); i++) {
         theWord[i] = tolower(word[i]);
     }
+
+    int index = hash_function(theWord);
+	node* cursor = hashtable[index];
+
 	while(cursor) {
 		if (strcmp(cursor->word, theWord) == 0) { 
 			return true;
@@ -63,37 +72,37 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
 	int num_misspelled = 0;
-	if (fp == NULL) {
-        printf("Could not open file");
-        return 0;
-    }
-
-    char str[10000];
+    char str[255];
     char* token = strtok(str," ");
 
-    while (fgets(str, 10000, fp) != NULL) {
-    	while(token != NULL){
+    while (fgets(str, 255, fp)) {
+        token = strtok(NULL," ");
+    	while (token != NULL){
             if (token[strlen(token)-1] =='\n'){
             	token[strlen(token)-1]='\0';
             }
             token[strlen(token)]='\0';    
 
             if (ispunct(token[strlen(token)-1])){
-                token[strlen(token)-1]='\0';
+                while(ispunct(token[strlen(token)-1])){
+                    token[strlen(token)-1]='\0';
+                }
             }
             if (ispunct(token[0])){
-                token[0]='\0';
+                while(ispunct(token[0])){
+                    token++;                    
+                }
             }
 
 			bool spellcheck = check_word(token,hashtable);
-			if(!spellcheck){
-        		// misspelled[num_misspelled] = malloc(strlen(token));
+			if(spellcheck == false){
+        		misspelled[num_misspelled] = malloc(strlen(token));
             	strcpy(misspelled[num_misspelled], token);
             	num_misspelled ++;
             }
             token = strtok(NULL," ");
-
 		}
+
     }
     return num_misspelled;
 }
