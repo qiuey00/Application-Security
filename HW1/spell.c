@@ -1,7 +1,5 @@
-#include <stdbool.h>
-#include <stdio.h>
-#include <string.h>
 #include "dictionary.h"
+#include <string.h>
 #include <ctype.h>
 #include <stdlib.h>
 
@@ -10,47 +8,51 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
         hashtable[i] = NULL;
     }
     FILE* fp = fopen(dictionary_file, "r");
-    if (!fp) {
-      printf("no file");
-      return false;
+
+    if (fp) {
+        char str[LENGTH];
+        while(fgets(str, LENGTH, fp)) {
+            if(str[strlen(str)-1] =='\n'){
+                str[strlen(str)-1]='\0';
+            }
+            for(int i = 0; i <= strlen(str); i++) {
+                str[i] = tolower(str[i]);
+            }
+      
+            int index = hash_function(str);
+
+            if (hashtable[index] == NULL) {
+                node *aNode = malloc(sizeof(node));
+                strncpy(aNode->word, str, LENGTH);
+                aNode->next = NULL;
+                hashtable[index] = aNode;
+            }
+
+            else{
+                node *aNode = malloc(sizeof(node));
+                strcpy(aNode->word, str);
+                aNode->next = hashtable[index];
+                hashtable[index] = aNode;
+            }
+
+        }
+        fclose(fp);
+        return true;
     }
-
-    char str[LENGTH];
-
-    while(fgets(str, LENGTH, fp)) {
-        for(int i = 0; i <= strlen(str); i++) {
-            str[i] = tolower(str[i]);
-        }
-
-        if (str[strlen(str)-1] == '\n'){
-            str[strlen(str)-1] = '\0';
-        }
-
-        int index = hash_function(str);
-
-        if (hashtable[index] == NULL) {
-            node *aNode = malloc(sizeof(node));
-            strcpy(aNode->word, str);
-            aNode->next = NULL;
-            hashtable[index] = aNode;
-        }
-        else{
-            node *aNode = malloc(sizeof(node));
-            strcpy(aNode->word, str);
-            aNode->next = hashtable[index];
-            hashtable[index] = aNode;
-        }
-    }
-    fclose(fp);
-    return true;
+    return false;
 }
 
 bool check_word(const char* word, hashmap_t hashtable[]) {
+    if((word == NULL || strlen(word) >LENGTH)){
+        return false;
+    }
+
     char theWord[LENGTH];
+
     for(int i=0; i<=strlen(word); i++) {
         theWord[i] = tolower(word[i]);
     }
-    printf(word);
+
     int index = hash_function(theWord);
     node* cursor = hashtable[index];
 
@@ -65,76 +67,56 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
     return false;
 }
 
-int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
-    char *pos = 0;
-    char *aWord;
+int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[]) { 
     int num_misspelled = 0;
-    char str[80];
+    char str[10000];
 
     if (fp == NULL){
-        return false;
+        return 0;
     }
 
-    while (fgets(str, 80, fp) != NULL) {
-        if ((pos = strchr(str, '\n')) != NULL)
-            *pos = '\0';
+    char* token = strtok(str, " ");
 
-        aWord = strtok(str," ");
+    while (fgets(str, 10000, fp)) {
 
-        if (aWord != NULL && strlen(aWord) > LENGTH){
-            aWord = NULL;
-        }
+        token = strtok(NULL," ");
 
-        if (aWord != NULL){
-            char *temp = aWord+ strlen(aWord) - 1;
-            char *temp2 = aWord;
-            while (ispunct(*temp)) {
-                temp++;
+        while (token != NULL){
+            if (token[strlen(token)-1] == '\n') {
+                token[strlen(token)-1] = '\0';
             }
-            while (ispunct(*temp2) && temp < temp2) { 
-                *temp2 = 0; temp2--; 
-            }
-            aWord=temp2;
-        }
 
-        while (aWord != false) {
-            if (check_word(aWord, hashtable)) {
-                aWord = strtok(NULL, " ");
-                if (aWord != NULL){
-                    char *temp = aWord+ strlen(aWord) - 1;
-                    char *temp2 = aWord;
-                    while (ispunct(*temp)) {
-                        temp++;
-                    }
-                    while (ispunct(*temp2) && temp < temp2) { 
-                        *temp2 = 0; temp2--; 
-                    }
-                    aWord=temp2;
+            token[strlen(token)] = '\0';
+
+            bool punc = ispunct(token[strlen(token)-1]);
+            if(punc) {
+                while (punc) {
+                    token[strlen(token)-1] = '\0';
+                    punc = ispunct(token[strlen(token)-1]);
                 }
             }
-            else {
-                if (num_misspelled < MAX_MISSPELLED){
-                    misspelled[num_misspelled] = (char *) malloc((LENGTH+1)*sizeof(char));
-                    strncpy(misspelled[num_misspelled],aWord,(LENGTH+1));
-                    num_misspelled++;
-                    aWord = strtok(NULL, " ");
-                    if (aWord != NULL){
-                        char *temp = aWord+ strlen(aWord) - 1;
-                        char *temp2 = aWord;
-                        while (ispunct(*temp)) {
-                            temp++;
-                        }
-                        while (ispunct(*temp2) && temp < temp2) { 
-                            *temp2 = 0; temp2--; 
-                        }
-                        aWord=temp2;
-                    }
-                }
-                else{
-                    return num_misspelled;
+
+            punc = ispunct(token[0]);
+            if(punc) {
+                while (punc) {
+                    token++;
+                    punc = ispunct(token[0]);
                 }
             }
+
+            bool correctness = check_word(token, hashtable);
+
+            if(!(correctness == 1 && strlen(str) < 10000)){
+                misspelled[num_misspelled] = malloc(strlen(token));
+                strcpy(misspelled[num_misspelled], token);
+                num_misspelled ++;
+            }
+            token = strtok(NULL, " ");
         }
+
+        return num_misspelled;
     }
-    return num_misspelled;
+    return 0;
 }
+
+
