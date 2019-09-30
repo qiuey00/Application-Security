@@ -55,7 +55,7 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
     int index = hash_function(theWord);
     node* cursor = hashtable[index];
 
-    while(cursor) {
+    while(cursor != NULL) {
       if (strcmp(cursor->word, theWord) == 0) { 
          return true;
      }
