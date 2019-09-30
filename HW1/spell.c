@@ -85,28 +85,32 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
         if (aWord != NULL && strlen(aWord) > LENGTH)
             aWord = NULL;
 
-        char *temp = aWord + strlen(aWord) - 1;
-        char *temp2 = aWord;
-        while (ispunct(*temp)) {
-            temp++;
+        if (aWord != NULL){
+            char *temp = aWord+ strlen(aWord) - 1;
+            char *temp2 = aWord;
+            while (ispunct(*temp)) {
+                temp++;
+            }
+            while (ispunct(*temp2) && temp < temp2) { 
+                *temp2 = 0; temp2--; 
+            }
+            aWord=temp;
         }
-        while (ispunct(*temp2) && temp < temp2) { 
-            *temp2 = 0; temp2--; 
-        }
-        aWord=temp;
 
-        while (aWord) {
+        while (aWord != false) {
             if (check_word(aWord, hashtable)) {
                 aWord = strtok(NULL, " ");
-                char *temp = aWord+ strlen(aWord) - 1;
-                char *temp2 = aWord;
-                while (ispunct(*temp)) {
-                    temp++;
+                if (aWord != NULL){
+                    char *temp = aWord+ strlen(aWord) - 1;
+                    char *temp2 = aWord;
+                    while (ispunct(*temp)) {
+                        temp++;
+                    }
+                    while (ispunct(*temp2) && temp < temp2) { 
+                        *temp2 = 0; temp2--; 
+                    }
+                    aWord=temp;
                 }
-                while (ispunct(*temp2) && temp < temp2) { 
-                    *temp2 = 0; temp2--; 
-                }
-                aWord=temp;
             }
             else {
                 if (num_misspelled < MAX_MISSPELLED){
