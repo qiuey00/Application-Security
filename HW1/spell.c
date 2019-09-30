@@ -9,9 +9,7 @@ bool load_dictionary(const char* dictionary_file, hashmap_t hashtable[]){
 	for(int i=0; i<=HASH_SIZE; i++){
         hashtable[i] = NULL;
     }
-
     FILE* fp = fopen(dictionary_file, "r");
-
     if (!fp) {
       printf("no file");
       return false;
@@ -52,18 +50,19 @@ bool check_word(const char* word, hashmap_t hashtable[]) {
     for(int i=0; i<=strlen(word); i++) {
         theWord[i] = tolower(word[i]);
     }
+    printf(word);
     int index = hash_function(theWord);
     node* cursor = hashtable[index];
 
     while(cursor != NULL) {
-      if (strcmp(cursor->word, theWord) == 0) { 
-         return true;
-     }
-     else{
-         cursor = cursor->next;
-     }
- }
- return false;
+        if (strcmp(theWord, cursor->word) == 0) { 
+            return true;
+        }
+        else{
+            cursor = cursor->next;
+        }
+    }
+    return false;
 }
 
 int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED]) { 
@@ -76,14 +75,15 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
         return false;
     }
 
-    while ( fgets(str, 80, fp) != NULL) {
+    while (fgets(str, 80, fp) != NULL) {
         if ((pos = strchr(str, '\n')) != NULL)
             *pos = '\0';
 
         aWord = strtok(str," ");
 
-        if (aWord != NULL && strlen(aWord) > LENGTH)
+        if (aWord != NULL && strlen(aWord) > LENGTH){
             aWord = NULL;
+        }
 
         if (aWord != NULL){
             char *temp = aWord+ strlen(aWord) - 1;
@@ -94,7 +94,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
             while (ispunct(*temp2) && temp < temp2) { 
                 *temp2 = 0; temp2--; 
             }
-            aWord=temp;
+            aWord=temp2;
         }
 
         while (aWord != false) {
@@ -109,7 +109,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
                     while (ispunct(*temp2) && temp < temp2) { 
                         *temp2 = 0; temp2--; 
                     }
-                    aWord=temp;
+                    aWord=temp2;
                 }
             }
             else {
@@ -127,7 +127,7 @@ int check_words(FILE* fp, hashmap_t hashtable[], char* misspelled[MAX_MISSPELLED
                         while (ispunct(*temp2) && temp < temp2) { 
                             *temp2 = 0; temp2--; 
                         }
-                        aWord=temp;
+                        aWord=temp2;
                     }
                 }
                 else{
