@@ -1,0 +1,60 @@
+==2574== Memcheck, a memory error detector
+==2574== Copyright (C) 2002-2013, and GNU GPL'd, by Julian Seward et al.
+==2574== Using Valgrind-3.10.1 and LibVEX; rerun with -h for copyright info
+==2574== Command: ./spell_check test1.txt wordlist.txt
+==2574== Parent PID: 2306
+==2574== 
+==2574== Use of uninitialised value of size 8
+==2574==    at 0x4EC2A7E: strtok (strtok.S:138)
+==2574==    by 0x400CE2: check_words (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40104F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== Use of uninitialised value of size 8
+==2574==    at 0x4EC2AAE: strtok (strtok.S:164)
+==2574==    by 0x400CE2: check_words (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40104F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== Conditional jump or move depends on uninitialised value(s)
+==2574==    at 0x4EC2AB1: strtok (strtok.S:165)
+==2574==    by 0x400CE2: check_words (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40104F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== Invalid write of size 1
+==2574==    at 0x4C2E1F3: strcpy (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2574==    by 0x400F70: check_words (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40104F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574==  Address 0x55fbfc4 is 0 bytes after a block of size 4 alloc'd
+==2574==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2574==    by 0x400F3E: check_words (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40104F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== 
+==2574== HEAP SUMMARY:
+==2574==     in use at exit: 6,653,877 bytes in 118,822 blocks
+==2574==   total heap usage: 118,824 allocs, 2 frees, 6,655,013 bytes allocated
+==2574== 
+==2574== 13 bytes in 3 blocks are definitely lost in loss record 1 of 5
+==2574==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2574==    by 0x400F3E: check_words (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40104F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== 6,496 bytes in 116 blocks are definitely lost in loss record 2 of 5
+==2574==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2574==    by 0x400A7A: load_dictionary (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40102F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== 6,647,368 (93,240 direct, 6,554,128 indirect) bytes in 1,665 blocks are definitely lost in loss record 5 of 5
+==2574==    at 0x4C2AB80: malloc (in /usr/lib/valgrind/vgpreload_memcheck-amd64-linux.so)
+==2574==    by 0x400ACC: load_dictionary (in /home/user/Desktop/Application-Security/spell_check)
+==2574==    by 0x40102F: main (in /home/user/Desktop/Application-Security/spell_check)
+==2574== 
+==2574== LEAK SUMMARY:
+==2574==    definitely lost: 99,749 bytes in 1,784 blocks
+==2574==    indirectly lost: 6,554,128 bytes in 117,038 blocks
+==2574==      possibly lost: 0 bytes in 0 blocks
+==2574==    still reachable: 0 bytes in 0 blocks
+==2574==         suppressed: 0 bytes in 0 blocks
+==2574== 
+==2574== For counts of detected and suppressed errors, rerun with: -v
+==2574== Use --track-origins=yes to see where uninitialised values come from
+==2574== ERROR SUMMARY: 9 errors from 7 contexts (suppressed: 0 from 0)
